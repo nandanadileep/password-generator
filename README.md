@@ -1,9 +1,9 @@
-# Fun Math Behind 
+# Math Behind 
 
 This project isn't just a random string generator; it uses **Information Theory** to estimate password strength. This document explains the mathematics used to calculate entropy and why we use specific numbers in the code.
 
 ## 1. What is Entropy?
-Entropy is a measure of randomness or "unpredictability." In the context of passwords, it is measured in **bits**. 
+Entropy is a measure of randomness or "unpredictability." In the context of passwords, it is measured in **bits**.
 
 * **1 bit** = A choice between 2 equal options (e.g., a coin flip: Heads or Tails).
 * **10 bits** = A choice between $2^{10}$ (1,024) options.
@@ -11,11 +11,8 @@ Entropy is a measure of randomness or "unpredictability." In the context of pass
 
 The higher the entropy, the exponentially harder it is for a computer to guess the password using brute-force attacks.
 
----
-
 ## 2. The Character Pool ($N$)
 Our generator uses the following character set:
-
 > `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}`
 
 Breaking this down:
@@ -27,7 +24,6 @@ Breaking this down:
 
 ## 3. The Formula
 The theoretical entropy ($H$) of a random password is calculated as:
-
 $$H = L \times \log_2(N)$$
 
 Where:
@@ -35,7 +31,7 @@ Where:
 * $N$ = Size of the Character Pool (80)
 
 ### The "Conservative" Estimate
-Ideally, $\log_2(80) \approx 6.32$ bits per character. However, in `src/App.js`, we use a slightly lower, conservative multiplier of **5.8** to account for real-world scenarios (like excluding ambiguous characters or assuming a hacker knows the pattern):
+Ideally, $\log_2(80) \approx 6.32$ bits per character. However, in `src/App.js`, we use a slightly lower, conservative multiplier of **5.8** to account for real-world scenarios:
 
 ```javascript
 // Actual implementation in src/App.js
